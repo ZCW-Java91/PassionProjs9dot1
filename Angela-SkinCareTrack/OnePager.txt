@@ -1,0 +1,12 @@
+Are you tired of the guesswork in your skincare routine? For instance, if you remembered to apply lotion or toner. Wish
+you could simply track which products you used and when? Say goodbye to the confusion and frustration with
+SkinCareTrack, the ultimate app that is designed to track and simplify your skincare routine.
+
+SkinCareTrack is an app that allows you to add in the products you use and record your skincare routine for each day,
+segmented into your morning and evening routines. You will register an account where you will provide your name,
+username, and password. Input your skincare products with their brand, name, type, and an image. After setting a
+routine, you can update it by adding more products or deleting the ones you decided to not use.
+
+I will make this app using Java, Spring Boot, MySQL, and Angular.
+
+
