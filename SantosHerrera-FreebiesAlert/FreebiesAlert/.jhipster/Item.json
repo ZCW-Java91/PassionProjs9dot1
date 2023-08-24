@@ -1,0 +1,46 @@
+{
+  "applications": "*",
+  "changelogDate": "20230823212249",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "item",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "distance",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Item",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "login",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "item",
+      "ownerSide": false,
+      "relationshipName": "tag",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

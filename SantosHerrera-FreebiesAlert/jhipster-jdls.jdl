@@ -1,0 +1,21 @@
+entity Tag {
+title String
+}
+
+
+entity Item {
+name String
+price Double
+distance Long
+description String
+}
+
+relationship ManyToOne {
+Item{login} to User
+}
+
+relationship ManyToMany{
+Tag{item(name)} to Item{tag(title)}
+}
+
+    
