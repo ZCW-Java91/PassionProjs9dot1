@@ -1,17 +1,21 @@
+entity UserProfile {
+    login String
+}
+
 entity Tag {
 title String
 }
 
-
 entity Item {
 name String
 price Double
-distance Long
+location String
+distance Integer
 description String
+image String
 }
-
-relationship ManyToOne {
-Item{login} to User
+relationship OneToOne {
+UserProfile{user(login)} to User{userProfile}
 }
 
 relationship ManyToMany{

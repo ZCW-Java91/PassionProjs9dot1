@@ -1,87 +1,47 @@
 import './home.scss';
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import { Row, Col, Alert } from 'reactstrap';
-
+import { Row, Col } from 'reactstrap';
 import { useAppSelector } from 'app/config/store';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
 
+  const items = [
+    { id: 1, title: 'Longer Item Title 1', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 2, title: 'Longer Item Title 2', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 3, title: 'Longer Item Title 3', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 4, title: 'Longer Item Title 4', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 5, title: 'Longer Item Title 5', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 6, title: 'Longer Item Title 6', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 7, title: 'Longer Item Title 7', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 8, title: 'Longer Item Title 8', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 9, title: 'Longer Item Title 9', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 10, title: 'Longer Item Title 10', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 11, title: 'Longer Item Title 11', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 12, title: 'Longer Item Title 12', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 13, title: 'Additional Item 1', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 14, title: 'Additional Item 2', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 15, title: 'Additional Item 3', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+    { id: 16, title: 'Additional Item 4', image: 'https://i.natgeofe.com/k/63b1a8a7-0081-493e-8b53-81d01261ab5d/red-panda-full-body_square.jpg' },
+  ];
+
   return (
+
     <Row>
-      <Col md="3" className="pad">
-        <span className="hipster rounded" />
-      </Col>
-      <Col md="9">
-        <h2>Welcome, Java Hipster!</h2>
-        <p className="lead">This is your homepage</p>
-        {account?.login ? (
-          <div>
-            <Alert color="success">You are logged in as user &quot;{account.login}&quot;.</Alert>
+      {items.map(item => (
+        <Col md={3} key={item.id}>
+          <div className="grid-item">
+            <Link to={`/item/${item.id}`} className="item-link">
+              <img src={item.image} alt={item.title} className="item-image" />
+              <span className="item-title">{item.title}</span>
+            </Link>
           </div>
-        ) : (
-          <div>
-            <Alert color="warning">
-              If you want to
-              <span>&nbsp;</span>
-              <Link to="/login" className="alert-link">
-                sign in
-              </Link>
-              , you can try the default accounts:
-              <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;) <br />- User (login=&quot;user&quot; and
-              password=&quot;user&quot;).
-            </Alert>
-
-            <Alert color="warning">
-              You don&apos;t have an account yet?&nbsp;
-              <Link to="/account/register" className="alert-link">
-                Register a new account
-              </Link>
-            </Alert>
-          </div>
-        )}
-        <p>If you have any question on JHipster:</p>
-
-        <ul>
-          <li>
-            <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">
-              JHipster homepage
-            </a>
-          </li>
-          <li>
-            <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">
-              JHipster on Stack Overflow
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">
-              JHipster bug tracker
-            </a>
-          </li>
-          <li>
-            <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-              JHipster public chat room
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">
-              follow @jhipster on Twitter
-            </a>
-          </li>
-        </ul>
-
-        <p>
-          If you like JHipster, don&apos;t forget to give us a star on{' '}
-          <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          !
-        </p>
-      </Col>
+          <br/>
+        </Col>
+      ))}
     </Row>
+
   );
 };
 

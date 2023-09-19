@@ -6,11 +6,13 @@ body {
     padding: 2rem;
     margin: auto;
     background: #fafafa;
+
 }
 
 img {
     max-width: 100%;
 }
+
 
 a {
     color: #2e8acc;

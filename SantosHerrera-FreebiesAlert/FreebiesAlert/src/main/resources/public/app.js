@@ -72,7 +72,7 @@ function showTicketList(data) {
         let by = document.createElement('p');
         //anything inside carrot tags
       //atag =link  ? is qualifier $ you want to fill in with variable
-        title.innerHTML = `<a href="/ticketdetail.html?ticketid=${post.id}">${post.name}</a>`;
+        title.innerHTML = `<a href="/ticketdetail.html?id=${post.id}">${post.name}</a>`;
         //post is a single json  ... title is one of the fields
         body.innerHTML = `${post.description}`;
         //let postedTime = dateOf(post.time)
@@ -95,28 +95,29 @@ function showTicketDetail(post) {
     const ul = document.getElementById('post');
     const detail = document.createDocumentFragment();
 
-    console.log("Ticket:", post);
+    console.log("item:", post);
     let li = document.createElement('div');
     let title = document.createElement('h2');
     let body = document.createElement('p');
     let by = document.createElement('p');
+
     title.innerHTML = `${post.name}`;
     body.innerHTML = `${post.description}`;
     //let postedTime = dateOf(post.time)
-    by.innerHTML = `${post.distance} - ${post.price}`;
+    by.innerHTML = `${post.distance}`;
 
     li.appendChild(title);
     li.appendChild(body);
     li.appendChild(by);
     detail.appendChild(li);
-
     ul.appendChild(detail);
+
 }
 
 function handlePages() {
     let ticketid = parseTicketId()
     console.log("ticketId: ",ticketid)
-
+//works good
     if (ticketid != null) {
         console.log("found a ticketId")
         fetchTicket(ticketid)
@@ -124,6 +125,7 @@ function handlePages() {
         console.log("load all tickets")
         fetchTicketsData()
     }
+
 }
 
 handlePages()

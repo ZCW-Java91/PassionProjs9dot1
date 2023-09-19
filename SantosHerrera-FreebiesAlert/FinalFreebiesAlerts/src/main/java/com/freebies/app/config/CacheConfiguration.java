@@ -48,6 +48,10 @@ public class CacheConfiguration {
             createCache(cm, com.freebies.app.domain.User.class.getName());
             createCache(cm, com.freebies.app.domain.Authority.class.getName());
             createCache(cm, com.freebies.app.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.freebies.app.domain.Tag.class.getName());
+            createCache(cm, com.freebies.app.domain.Tag.class.getName() + ".items");
+            createCache(cm, com.freebies.app.domain.Item.class.getName());
+            createCache(cm, com.freebies.app.domain.Item.class.getName() + ".tags");
             // jhipster-needle-ehcache-add-entry
         };
     }

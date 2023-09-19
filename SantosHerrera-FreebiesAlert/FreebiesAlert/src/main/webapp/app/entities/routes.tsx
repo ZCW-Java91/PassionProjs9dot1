@@ -5,6 +5,7 @@ import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 
 import Tag from './tag';
 import Item from './item';
+import Something from './something'
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -14,6 +15,7 @@ export default () => {
         {/* prettier-ignore */}
         <Route path="tag/*" element={<Tag />} />
         <Route path="item/*" element={<Item />} />
+        <Route path="something/*" element={<Tag />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

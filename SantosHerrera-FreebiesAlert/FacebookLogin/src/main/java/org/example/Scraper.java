@@ -5,14 +5,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import javax.imageio.ImageIO;
 
+import java.util.ArrayList;
 import java.util.List;
-public class Scraper {
-    public static void main(String[] args) throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver","/Users/santos/LocalPros/Passion Project/PassionProjs9dot1/SantosHerrera-FreebiesAlert/chromedriver-mac-arm64/chromedriver");
-        //System.setProperty("webdriver.chrome.driver","/Users/santos/LocalPros/Passion Project/chromedriver-mac-arm64/chromedriver");
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+public class Scraper {
+    private ArrayList<Item> itemArrayList;
+    public WebDriver driver(){
+
+        System.out.println("Configuring Chrome");
+        System.setProperty("webdriver.chrome.driver","/Users/santos/LocalPros/Passion Project/PassionProjs9dot1/SantosHerrera-FreebiesAlert/chromedriver-mac-arm64/chromedriver");
         ChromeOptions options = new ChromeOptions();
         String userAget = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36";
         options.addArguments(String.format("user-agent=%s", userAget));
@@ -22,24 +26,67 @@ public class Scraper {
         options.addArguments("--disable-plugins-discovery");
         options.addArguments("--start-maximized");
         WebDriver driver= new ChromeDriver(options);
-
+        System.out.println("Logging into Facebook");
         //Login to facebook
         driver.get("https://www.facebook.com");
         driver.manage().window().maximize();
-        driver.findElement(By.id("email")).sendKeys("3025259704");
-        driver.findElement(By.name("pass")).sendKeys("BobLee30??");
+        driver.findElement(By.id("email")).sendKeys(UrlLinkEnum.UserName.getLink());
+        driver.findElement(By.name("pass")).sendKeys(UrlLinkEnum.Password.getLink());
         driver.findElement(By.name("login")).click();
         driver.findElement(By.className("_97w4")).click();
         driver.findElement(By.className("_aklt")).click();
-        driver.findElement(By.name("pass")).sendKeys("BobLee30??");
+        driver.findElement(By.name("pass")).sendKeys(UrlLinkEnum.Password.getLink());
         driver.findElement(By.name("login")).click();
-        driver.get("https://www.facebook.com/marketplace");
-        //Scrape items from page
-        List<WebElement> WebElement  =  driver.findElements(By.className("xjp7ctv"));
-        for (WebElement element : WebElement) {
-            System.out.println(element.getText());
-            System.out.println(element.getAttribute("outerHTML"));
-            System.out.println("---------------------");
-        }
+        return driver;
+
     }
-}
+    public ArrayList<Item> scrapeData(String category,WebDriver driver)throws InterruptedException{
+             itemArrayList=new ArrayList<>();
+            System.out.println("Scraping Data");
+            driver.get(category);
+            //Scrape items from page
+            List<WebElement> WebElement  =  driver.findElements(By.className("xjp7ctv"));
+            for (WebElement element : WebElement) {
+                Item item=new Item();
+                String[] lines = element.getText().split("\n");
+                try {
+                    item.setPrice(lines[0]);
+                }catch (ArrayIndexOutOfBoundsException e){
+
+                }
+                try {
+                    item.setName(lines[1]);
+                }catch (ArrayIndexOutOfBoundsException e){
+
+                }
+                try {
+                    item.setLocation(lines[2]);
+                }catch (ArrayIndexOutOfBoundsException e){
+                }
+                String outerHtml = element.getAttribute("outerHTML");
+                // Extract the image link using a regular expression
+
+                Pattern imgPattern = Pattern.compile("<img\\s+.*?src\\s*=\\s*['\"]([^'\"]+)['\"].*?>");
+                Matcher imgMatcher = imgPattern.matcher(outerHtml);
+                if (imgMatcher.find()) {
+                    String imageLink = imgMatcher.group(1);
+                    imageLink = imageLink.replace("&amp;", "&");
+                    item.setImageLink(imageLink);
+                    itemArrayList.add(item);
+                }
+            }
+            for (Item i:itemArrayList
+            ) {
+                System.out.println(i.toString());
+            }
+            return itemArrayList;
+        }
+
+    public static void main(String[] args) throws InterruptedException {
+        Scraper scrape=new Scraper();
+        WebDriver driver=scrape.driver();
+        scrape.scrapeData(UrlLinkEnum.Garden.getLink(),driver);
+        scrape.scrapeData(UrlLinkEnum.Home.getLink(),driver);
+        scrape.scrapeData(UrlLinkEnum.Toys.getLink(),driver);
+    }
+    }
