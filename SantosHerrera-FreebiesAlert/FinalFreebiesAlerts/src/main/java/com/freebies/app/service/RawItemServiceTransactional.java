@@ -42,11 +42,6 @@ public class RawItemServiceTransactional {
     public Item saveSingleArticle(RawItem rawItem){
         //Convert from newsArticle Raw to news Article
         Item item=itemMapper.externalToInternal(rawItem);
-
-
-        //Save User Profile
-
-
         //Categories
         for(String s: rawItem.getCategory()) {
             Tag category = findOrMakeNewCategory(capitalize(s));

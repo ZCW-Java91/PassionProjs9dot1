@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class Scraper {
     private ArrayList<Items> itemArrayList;
-    public WebDriver driver(){
+    public static WebDriver driver(){
 
         System.out.println("Configuring Chrome");
         System.setProperty("webdriver.chrome.driver","webpack/chromedriver");
@@ -36,11 +36,12 @@ public class Scraper {
         driver.findElement(By.id("email")).sendKeys(UrlLinkEnum.UserName.getLink());
         driver.findElement(By.name("pass")).sendKeys(UrlLinkEnum.Password.getLink());
         driver.findElement(By.name("login")).click();
-//        driver.findElement(By.className("_97w4")).click();
-//        driver.findElement(By.className("_aklt")).click();
-//        driver.findElement(By.name("pass")).sendKeys(UrlLinkEnum.Password.getLink());
-//        driver.findElement(By.name("login")).click();
+        driver.findElement(By.className("_97w4")).click();
+        driver.findElement(By.className("_aklt")).click();
+        driver.findElement(By.name("pass")).sendKeys(UrlLinkEnum.Password.getLink());
+        driver.findElement(By.name("login")).click();
         return driver;
+
 
     }
     public ArrayList<Items> scrapeData(String category, WebDriver driver)throws InterruptedException{
